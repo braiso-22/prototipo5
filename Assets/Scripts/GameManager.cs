@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     private float spawnRate = 1.0f;
     public List<GameObject> targets;
+    public TextMeshProUGUI scoreText;
+    private int score = 0;
     IEnumerator SpawnTarget()
     {
         while (true)
@@ -19,11 +22,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnTarget());
+        UpdateScore(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScore(int scoreToAdd)
     {
-
+        score += scoreToAdd;
+        scoreText.text = "Puntuacion: " + score;
     }
 }
