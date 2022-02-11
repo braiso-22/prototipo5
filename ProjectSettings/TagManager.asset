@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bad
+  - vida
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Objeto
+  - Cursor
   - Water
   - UI
-  - 
+  - Objeto
   - 
   - 
   - 

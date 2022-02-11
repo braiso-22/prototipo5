@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8631792724384196033}
   - component: {fileID: 1785878061664974637}
   - component: {fileID: 3501007291302424299}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Bueno1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

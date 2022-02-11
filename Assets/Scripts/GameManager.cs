@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
     private float spawnRate = 2.0f;
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI lifesText;
     public GameObject gameOverMenu;
     public GameObject titleScreen;
+    public GameObject inGameScreen;
     private int score = 0;
     public bool isGameActive;
     private int currentLives;
@@ -28,30 +30,34 @@ public class GameManager : MonoBehaviour
         score += scoreToAdd;
         scoreText.text = "Puntuacion: " + score;
     }
+    public void updateLifes(int lifesToTake)
+    {
+        currentLives -= lifesToTake;
+        lifesText.text = "Vidas: " + currentLives;
+    }
     public void StartGame(int difficulty)
     {
         currentLives = 3;
+        updateLifes(0);
         spawnRate /= difficulty;
         isGameActive = true;
         StartCoroutine(SpawnTarget());
         UpdateScore(0);
-        titleScreen.gameObject.SetActive(false);
+        titleScreen.SetActive(false);
+        inGameScreen.SetActive(true);
     }
     public void GameOver()
     {
-        if (currentLives == 1)
-        {
+        updateLifes(1);
+        if (currentLives == 0)
+        {   
             gameOverMenu.SetActive(true);
             isGameActive = false;
         }
-        else
-        {
-            currentLives--;
-        }
-
     }
     public void RestartGame()
     {
+        inGameScreen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
