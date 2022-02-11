@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bad
   - vida
+  - sensor
+  - Cursor
   layers:
   - Default
   - TransparentFX

@@ -38,20 +38,24 @@ public class Target : MonoBehaviour
         transform.position = RandomSpawnPosX(-xRange, xRange, ySpawnPos);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
-
-    private void OnMouseDown()
-    {
-        if (gameManager.isGameActive)
-        {
-            Destroy(gameObject);
-            gameManager.UpdateScore(pointValue);
-        }
-    }
     private void OnTriggerEnter(Collider other)
     {
-        if (!gameObject.CompareTag("Bad"))
+        if (other.CompareTag("sensor"))
         {
-            gameManager.GameOver();
+            Destroy(gameObject);
+            if (!gameObject.CompareTag("Bad"))
+            {
+                gameManager.GameOver();
+            }
+        }
+        if (other.CompareTag("Cursor"))
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Destroy(gameObject);
+                gameManager.UpdateScore(pointValue);
+            }
+
         }
     }
 }
