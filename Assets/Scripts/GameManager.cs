@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject titleScreen;
     private int score = 0;
     public bool isGameActive;
+    private int currentLives;
     IEnumerator SpawnTarget()
     {
         while (isGameActive)
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame(int difficulty)
     {
+        currentLives = 3;
         spawnRate /= difficulty;
         isGameActive = true;
         StartCoroutine(SpawnTarget());
@@ -37,8 +39,16 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        gameOverMenu.SetActive(true);
-        isGameActive = false;
+        if (currentLives == 1)
+        {
+            gameOverMenu.SetActive(true);
+            isGameActive = false;
+        }
+        else
+        {
+            currentLives--;
+        }
+
     }
     public void RestartGame()
     {
