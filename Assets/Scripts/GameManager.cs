@@ -15,9 +15,13 @@ public class GameManager : MonoBehaviour
     public GameObject inGameScreen;
     public GameObject cursor;
     public GameObject trail;
+    private AudioSource sonido;
+    public AudioClip[] cortes;
     private int score = 0;
     public bool isGameActive;
     private int currentLives;
+    private float xAnterior;
+    private float yAnterior;
     IEnumerator SpawnTarget()
     {
         while (isGameActive)
@@ -39,6 +43,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame(int difficulty)
     {
+        sonido = GetComponent<AudioSource>();
         currentLives = 3;
         updateLifes(0);
         spawnRate /= difficulty;
@@ -70,12 +75,15 @@ public class GameManager : MonoBehaviour
             cursor.SetActive(true);
             if (Input.GetMouseButtonDown(0))
             {
+                sonido.PlayOneShot(cortes[Random.Range(0, cortes.Length)], 1);
                 trail.SetActive(true);
             }
             if (Input.GetMouseButtonUp(0))
             {
                 trail.SetActive(false);
             }
+            xAnterior = cursor.transform.position.x;
+            yAnterior = cursor.transform.position.y;
         }
         else
         {
