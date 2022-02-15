@@ -1,0 +1,2 @@
+*.shader text linguist-vendored
+*.cginc text linguist-vendored
